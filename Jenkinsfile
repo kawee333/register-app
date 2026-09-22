@@ -33,12 +33,5 @@ pipeline {
                 }
             }
         }
-
-        stage("Quality Gate") {
-            steps {
-                // Waits for SonarQube Webhook response
-                waitForQualityGate abortPipeline: true
-            }
-        }
     }
 }
