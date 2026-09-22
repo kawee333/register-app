@@ -19,15 +19,25 @@ pipeline {
             }
         }
 
-        stage("Build Application") {
+        stage("Build & Test Application") {
             steps {
                 sh "mvn clean package"
             }
         }
 
-        stage("Test Application") {
+        stage("SonarQube Analysis") {
             steps {
-                sh "mvn test"
+                // Use the Server Name defined under Manage Jenkins -> System -> SonarQube servers
+                withSonarQubeEnv('sonarqube-server') {
+                    sh "mvn sonar:sonar"
+                }
+            }
+        }
+
+        stage("Quality Gate") {
+            steps {
+                // Waits for SonarQube Webhook response
+                waitForQualityGate abortPipeline: true
             }
         }
     }
