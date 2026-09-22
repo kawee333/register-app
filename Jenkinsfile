@@ -27,10 +27,9 @@ pipeline {
 
         stage("SonarQube Analysis") {
             steps {
-                // Use the Server Name defined under Manage Jenkins -> System -> SonarQube servers
-                withSonarQubeEnv('sonarqube-server') {
-                    sh "mvn sonar:sonar"
-                }
+                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
+                        sh "mvn sonar:sonar"
+		        }
             }
         }
     }
