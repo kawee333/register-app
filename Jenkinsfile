@@ -27,9 +27,17 @@ pipeline {
 
         stage("SonarQube Analysis") {
             steps {
-                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
-                        sh "mvn sonar:sonar"
-		        }
+                // 'SonarQube' must match the Server Name in Manage Jenkins -> System -> SonarQube servers
+                withSonarQubeEnv('SonarQube') { 
+                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar"
+                }
+            }
+        }
+
+        stage("Quality Gate") {
+            steps {
+                // Pauses execution until SonarQube returns the Quality Gate result
+                waitForQualityGate abortPipeline: true
             }
         }
     }
