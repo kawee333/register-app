@@ -27,10 +27,9 @@ pipeline {
 
         stage("SonarQube Analysis") {
             steps {
-                // 'SonarCloud' යනු Jenkins -> System හි configure කළ Server name එකයි
                 withSonarQubeEnv('SonarCloud') { 
                     sh """
-                        mvn sonar:sonar \
+                        mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
                           -Dsonar.organization=YOUR_SONAR_CLOUD_ORG_KEY \
                           -Dsonar.projectKey=YOUR_SONAR_CLOUD_PROJECT_KEY \
                           -Dsonar.host.url=https://sonarcloud.io
@@ -41,7 +40,6 @@ pipeline {
 
         stage("Quality Gate") {
             steps {
-                // SonarCloud Analysis එක ඉවර වී Result එක එනතෙක් බලයි
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
