@@ -29,7 +29,7 @@ pipeline {
             steps {
                 // Sonar details දැන් pom.xml එකෙන් කෙළින්ම ලබාගනී
                 withSonarQubeEnv('SonarCloud') { 
-                    sh "mvn sonar:sonar -U"
+                    sh "mvn sonar:sonar"
                 }
             }
         }
