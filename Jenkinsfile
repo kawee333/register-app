@@ -27,13 +27,17 @@ pipeline {
 
         stage("SonarQube Analysis") {
             steps {
+                // Sonar details දැන් pom.xml එකෙන් කෙළින්ම ලබාගනී
                 withSonarQubeEnv('SonarCloud') { 
-                    sh """
-                        mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-                          -Dsonar.organization=kawee333-org \
-                          -Dsonar.projectKey=kawee333-org_register-app \
-                          -Dsonar.host.url=https://sonarcloud.io
-                    """
+                    sh "mvn sonar:sonar"
+                }
+            }
+        }
+
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
