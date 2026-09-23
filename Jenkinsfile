@@ -30,8 +30,8 @@ pipeline {
                 withSonarQubeEnv('SonarCloud') { 
                     sh """
                         mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-                          -Dsonar.organization=YOUR_SONAR_CLOUD_ORG_KEY \
-                          -Dsonar.projectKey=YOUR_SONAR_CLOUD_PROJECT_KEY \
+                          -Dsonar.organization=kawee333-org
+                          -Dsonar.projectKey=kawee333-org_register-app
                           -Dsonar.host.url=https://sonarcloud.io
                     """
                 }
