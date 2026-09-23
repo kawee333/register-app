@@ -26,11 +26,11 @@ pipeline {
         }
 
         stage("SonarQube Analysis") {
-    steps {
-        withSonarQubeEnv('SonarCloud') { 
-            sh "mvn sonar:sonar -Dsonar.moduleKey=\${project.groupId}:\${project.artifactId}"
-               }
-            }
-         }
-    }
-}
+            steps {
+                withSonarQubeEnv('SonarCloud') { 
+                    sh "mvn sonar:sonar"
+                  }
+              }
+           }
+      }
+  }
