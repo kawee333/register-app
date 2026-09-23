@@ -20,6 +20,7 @@
     <!-- SonarCloud Properties (Multi-module support) -->
     <sonar.organization>kawee333-org</sonar.organization>
     <sonar.projectKey>kawee333-org_register-app</sonar.projectKey>
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
 
@@ -66,11 +67,11 @@
         </configuration>
       </plugin>
 
-      <!-- SonarQube Scanner Plugin (Explicitly added to prevent warnings) -->
+      <!-- SonarQube Scanner Plugin -->
       <plugin>
         <groupId>org.sonarsource.scanner.maven</groupId>
         <artifactId>sonar-maven-plugin</artifactId>
-      <version>3.9.1.2184</version>
+        <version>3.9.1.2184</version>
       </plugin>
     </plugins>
 
@@ -79,7 +80,7 @@
         <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.11.0.3501</version>
+          <version>3.9.1.2184</version>
         </plugin>
 
         <plugin>
@@ -139,7 +140,6 @@
     </pluginManagement>
   </build>
 
-  <!-- Proper modern reporting section format -->
   <reporting>
     <plugins>
       <plugin>
