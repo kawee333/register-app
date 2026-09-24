@@ -1,7 +1,6 @@
-FROM node:18-alpine
+
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
+COPY target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
